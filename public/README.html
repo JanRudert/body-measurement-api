@@ -95,9 +95,9 @@ sup {
 <body>
 <h1>Body Measurement Api</h1><p><a href="https://travis-ci.org/JanRudert/body-measurement-api"><img src="https://travis-ci.org/JanRudert/body-measurement-api.svg?branch=master" alt="Build Status""/></a></p><p>Provides a REST Api to store and read measurements of patients.</p><h1>Links</h1>
 <ul>
-  <li><a href="http://TODO/">Live instance</a></li>
+  <li><a href="http://body-measurement-api.herokuapp.com/">Live instance</a></li>
   <li><a href="https://github.com/JanRudert/body-measurement-api">Repository</a></li>
-  <li><a href="http://TODO">Build Pipeline</a></li>
+  <li><a href="https://travis-ci.org/JanRudert/body-measurement-api/builds">Build Pipeline</a></li>
 </ul><h1>API</h1><h2>JSON-Objects</h2><h3>create</h3>
 <pre><code>POST       /measurements
 {   
@@ -106,16 +106,16 @@ sup {
     &quot;type&quot;: &quot;BloodPressure&quot;, 
     &quot;value&quot;: 5.5
 }
-</code></pre><p>The <code>patientId</code> is the reference to the person which metadata is stored in other parts of the system. The <code>type</code> value can be chosen freely. There is one <code>timestamp</code> format allowed currently. The <code>value</code> property is the a decimal value.</p><p>This is an example curl call:</p>
+</code></pre><p>The <code>patientId</code> is the reference to the person whose metadata is stored in other parts of the system. The <code>type</code> value can be chosen freely. There is one <code>timestamp</code> format allowed currently. The <code>value</code> property is a decimal value.</p><p>This is an example curl call:</p>
 <pre><code>curl -X POST -H &quot;Content-type: application/json&quot; http://localhost:9000/measurements -d &#39;{ &quot;timestamp&quot;: &quot;2015-05-01T13:00:00+02:00&quot;, &quot;patientId&quot;: 4711, &quot;type&quot;: &quot;BloodPressure&quot;, &quot;value&quot;: 5.5 }&#39;
 </code></pre><h3>lookup</h3><p>As the client application is expected to display measurements for one user only the <code>patientId</code> is part of the path: </p>
 <pre><code>GET        /measurements/:patientId
-</code></pre><p>Following filters can be applied:</p>
+</code></pre><p>Following filters can be applied as query parameters:</p>
 <ul>
   <li>type - one single measurement type</li>
   <li>from - time range start, if omitted no lower boundary</li>
   <li>to - time range start, if omitted no upper boundary</li>
-</ul><p>For demo reasons the time range filter only support the format <code>yyyyMMdd</code> currently. They are inclusive and assume UTC.</p><p>The response will contain a sequence of measurements:</p>
+</ul><p>For demo reasons the time range filter only supports the format <code>yyyyMMdd</code> currently. They are inclusive and assume UTC.</p><p>The response will contain a sequence of measurements:</p>
 <pre><code>  [
       {   
           &quot;timestamp&quot;: &quot;2015-05-01T13:00:00+02:00&quot;, 
@@ -130,8 +130,8 @@ sup {
           &quot;value&quot;: 36.8
       }
   ]
-</code></pre><p>This is the curl example which retrieves all entries for the patient:</p>
-<pre><code>curl http://localhost:9000/measurements/4711 | json_pp
+</code></pre><p>This is the curl example which retrieves all <code>Temperature</code> entries for the patient:</p>
+<pre><code>curl http://localhost:9000/measurements/4711?type=Temperature 
 </code></pre><h1>Prerequisites</h1>
 <ul>
   <li>Git</li>
@@ -141,8 +141,8 @@ sup {
 $ cd body-measurement-api
 </code></pre><h2>Start the application locally</h2>
 <pre><code>./sbt run
-</code></pre><p>This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000]. </p><h2>Test</h2><p>./sbt test</p><h2>Continuous Integration (CI)</h2><p>TODO</p><h2>Deployment</h2>
-<pre><code>TODO
-</code></pre><h1>Persistence</h1><p>The application uses a classical SQL database. The expected amount of data and the fixed (row-based) structure of it make a relational database a good choice for the start. </p><p>For demo reasons the API runs on H2 in-memory database only at the moment. Extending it to use Postgres should be a simple configuration change. </p>
+</code></pre><p>This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at <a href="http://localhost:9000">http://localhost:9000</a>. </p><h2>Test</h2>
+<pre><code>./sbt test
+</code></pre><h2>Continuous Deployment</h2><p>On every push on branch <code>master</code> the application will be built and tested on <a href="https://travis-ci.org/JanRudert/body-measurement-api/builds">travis</a>. If the build succeeds, it will be deployed to heroku and will be public available at <a href="http://body-measurement-api.herokuapp.com/">heroku</a>.</p><h1>Persistence</h1><p>The application uses a classical SQL database. The expected amount of data and the fixed (row-based) structure of it make a relational database a good choice for the start. </p><p>For demo reasons the API runs on H2 in-memory database only at the moment. Extending it to use Postgres should be a simple configuration change. </p>
 </body>
 </html>

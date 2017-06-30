@@ -41,7 +41,7 @@ As the client application is expected to display measurements for one user only 
     GET        /measurements/:patientId
     
 
-Following filters can be applied:
+Following filters can be applied as query parameters:
     
  * type - one single measurement type
  * from - time range start, if omitted no lower boundary
@@ -66,9 +66,9 @@ The response will contain a sequence of measurements:
           }
       ]
       
-This is the curl example which retrieves all entries for the patient:
+This is the curl example which retrieves all `Temperature` entries for the patient:
 
-    curl http://localhost:9000/measurements/4711 | json_pp
+    curl http://localhost:9000/measurements/4711?type=Temperature 
 
 
 # Prerequisites
