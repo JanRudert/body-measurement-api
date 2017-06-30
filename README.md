@@ -1,5 +1,7 @@
 # Body Measurement Api
 
+[![Build Status](https://travis-ci.org/JanRudert/body-measurement-api.svg?branch=master)](https://travis-ci.org/JanRudert/body-measurement-api)
+
 Provides a REST Api to store and read measurements of patients.
 
 # Links
