@@ -1,7 +1,10 @@
 language: scala
 scala:
-   - 2.12.2
+- 2.12.2
 jdk:
-  - oraclejdk8
+- oraclejdk8
 notifications:
   email: false
+deploy:
+  api_key:
+    secure: Shak5tyuLIzzsUSBS4OJGmMd16Nv84i3diwpiYcc4rfruKBChaLkdyG2nLkzAhrrftzc/SIPcQ35APQC2lZbB1wQxOsw7bHUbN1maGcFunu2zeoHiCMDqjb2/sDx07latKHDhiqBwqFDRkNXaVnD/3StAk+uDkOGSNdLKq8wc/eEzT2GnGlgkANfnaqmo9LN9Jmq7oxjuvxOZtllHO8y8oaCHMYDOQkfE4qc3w/iYCFP4S2jHS68/RjyGotaz7n9SdmoMDyTimm18tn8FDAI2zSry5w7ZA9y9QgEzyTUDvY3JBZJWX540o2sdU5FkOJT8x0d5CObNDCgoO1lgnu86euqmQR5w5eZDvcplpVpg7p3MU9Gz05SapFtkc7x3INMDp6cbEhALUolk04hX4x7wCkJed52uiURZxPyaNmHcC65YWswtIbbohbE07RlBEW2xkmTfs7+zIhWRjQQFUu7bk79T/wtARjzg8gcosA0j1Udd7Jdsygb4lT0A+9VCMrdgOg9QL90E1XK/9wIQESRhT2B83eba48g/4q6Muhs9/SCI6UJTFudnfElRcyx2oDdBiZf19SaOQdZ5beDB+R1Zv5j9n1SBgEi5mFxZdnuUSM6cC77a0jqTJrMndk14CJmBxuoNj4tHbnSB86PynyLJvt5A+wsPLXG1Duhu42cr7g=
