@@ -2,9 +2,5 @@ GET         /                               controllers.HomeController.index()
 
 POST        /measurements                   controllers.MeasurementController.create
 
-# all measurements for patient has time range filter and type filter
+# has time range filter and type filter query parameters
 GET         /measurements/:patientId        controllers.MeasurementController.lookup(patientId:Int)
-
-# Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
-
