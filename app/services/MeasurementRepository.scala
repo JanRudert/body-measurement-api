@@ -25,10 +25,9 @@ class MeasurementRepository @Inject()(protected val dbConfigProvider: DatabaseCo
         patientId.map(measurement.patientId === _),
         tipe.map(measurement.tipe === _),
         from.map(measurement.timestamp > sql.Timestamp.from(_)),
-          to.map(measurement.timestamp < sql.Timestamp.from(_))
+        to.map(measurement.timestamp < sql.Timestamp.from(_))
       ).collect({ case Some(criteria) => criteria }).reduceLeftOption(_ && _).getOrElse(false: Rep[Boolean]))
       .result)
-
 
 
   private class MeasurementsTable(tag: Tag) extends Table[BodyMeasurement](tag, "BODY_MEASUREMENT") {
