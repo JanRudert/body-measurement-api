@@ -87,7 +87,7 @@ This is the curl example which retrieves all entries for the patient:
 
     ./sbt run
     
-This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000]. 
+This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000] ( http://localhost:9000 ). 
 
 
 ## Test 
@@ -95,13 +95,9 @@ This will download sbt and project dependencies on the first run. Afterwards the
 ./sbt test
 
 
-## Continuous Integration (CI)
+## Continuous Deployment
 
-TODO
-
-## Deployment
-
-    TODO
+On every push on branch `master` the application will be built and tested on [travis] (https://travis-ci.org/JanRudert/body-measurement-api/builds). If the build succeeds, it will be deployed to heroku and will be public available at [heroku] ().
     
 # Persistence
 
