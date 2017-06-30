@@ -85,7 +85,7 @@ This is the curl example which retrieves all entries for the patient:
 
     ./sbt run
     
-This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000] (http://localhost:9000) 
+This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000]. 
 
 
 ## Test 
