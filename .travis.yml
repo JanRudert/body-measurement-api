@@ -1,6 +1,6 @@
-language: scala 
-env:
-  - PLAY_VERSION=2.6.0
+language: scala
+jdk:
+  - oraclejdk8
 script: ./sbt test
 notifications:
   email: false
