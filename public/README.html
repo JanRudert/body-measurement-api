@@ -1,0 +1,148 @@
+<html>
+<head>
+<title></title><style type='text/css'>*{margin:0;padding:0;}
+body {
+    font:13.34px helvetica,arial,freesans,clean,sans-serif;
+    color:black;
+    line-height:1.4em;
+    background-color: #F8F8F8;
+    padding: 0.7em;
+}
+p {
+    margin:1em 0;
+    line-height:1.5em;
+}
+table {
+    font-size:inherit;
+    font:100%;
+    margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Menlo, Monaco, "DejaVu Sans Mono", "Bitstream Vera Sans Mono",monospace;}
+pre {
+    margin:1em 0;
+    font-size:12px;
+    background-color:#eee;
+    border:1px solid #ddd;
+    padding:5px;
+    line-height:1.5em;
+    color:#444;
+    overflow:auto;
+    -webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+    padding:0;
+    font-size:12px;
+    background-color:#eee;
+    border:none;
+}
+code {
+    font-size:12px;
+    background-color:#f8f8ff;
+    color:#444;
+    padding:0 .2em;
+    border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+    -webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+    table, pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}</style>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+</head>
+<body>
+<h1>Body Measurement Api</h1><p>Provides a REST Api to store and read measurements of patients.</p><h1>Links</h1>
+<ul>
+  <li><a href="http://TODO/">Live instance</a></li>
+  <li><a href="https://github.com/JanRudert/body-measurement-api">Repository</a></li>
+  <li><a href="http://TODO">Build Pipeline</a></li>
+</ul><h1>API</h1><h2>JSON-Objects</h2><h3>create</h3>
+<pre><code>POST       /measurements
+{   
+    &quot;timestamp&quot;: &quot;2015-05-01T13:00:00+02:00&quot;, 
+    &quot;patientId&quot;: 4711, 
+    &quot;type&quot;: &quot;BloodPressure&quot;, 
+    &quot;value&quot;: 5.5
+}
+</code></pre><p>The <code>patientId</code> is the reference to the person which metadata is stored in other parts of the system. The <code>type</code> value can be chosen freely. There is one <code>timestamp</code> format allowed currently. The <code>value</code> property is the a decimal value.</p><p>This is an example curl call:</p>
+<pre><code>curl -X POST -H &quot;Content-type: application/json&quot; http://localhost:9000/measurements -d &#39;{ &quot;timestamp&quot;: &quot;2015-05-01T13:00:00+02:00&quot;, &quot;patientId&quot;: 4711, &quot;type&quot;: &quot;BloodPressure&quot;, &quot;value&quot;: 5.5 }&#39;
+</code></pre><h3>lookup</h3><p>As the client application is expected to display measurements for one user only the <code>patientId</code> is part of the path: </p>
+<pre><code>GET        /measurements/:patientId
+</code></pre><p>Following filters can be applied:</p>
+<ul>
+  <li>type - one single measurement type</li>
+  <li>from - time range start, if omitted no lower boundary</li>
+  <li>to - time range start, if omitted no upper boundary</li>
+</ul><p>For demo reasons the time range filter only support the format <code>yyyyMMdd</code> currently. They are inclusive and assume UTC.</p><p>The response will contain a sequence of measurements:</p>
+<pre><code>  [
+      {   
+          &quot;timestamp&quot;: &quot;2015-05-01T13:00:00+02:00&quot;, 
+          &quot;patientId&quot;: 4711, 
+          &quot;type&quot;: &quot;BloodPressure&quot;, 
+          &quot;value&quot;: 5.5
+      },
+      {   
+          &quot;timestamp&quot;: &quot;2017-05-01T13:00:00+02:00&quot;, 
+          &quot;patientId&quot;: 4712, 
+          &quot;type&quot;: &quot;Temperature&quot;, 
+          &quot;value&quot;: 36.8
+      }
+  ]
+</code></pre><p>This is the curl example which retrieves all entries for the patient:</p>
+<pre><code>curl http://localhost:9000/measurements/4711 | json_pp
+</code></pre><h1>Prerequisites</h1>
+<ul>
+  <li>Git</li>
+  <li>Open JDK 1.8 or Oracle JDK 1.8</li>
+</ul><h1>Development</h1><h2>Cloning the repository</h2>
+<pre><code>$ git clone git@github.com:JanRudert/body-measurement-api.git
+$ cd body-measurement-api
+</code></pre><h2>Start the application locally</h2>
+<pre><code>./sbt run
+</code></pre><p>This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at <a href="http://localhost:9000">http://localhost:9000</a> </p><h2>Test</h2><p>./sbt test</p><h2>Continuous Integration (CI)</h2><p>TODO</p><h2>Deployment</h2>
+<pre><code>TODO
+</code></pre><h1>Persistence</h1><p>The application uses a classical SQL database. The expected amount of data and the fixed (row-based) structure of it make a relational database a good choice for the start. </p><p>For demo reasons the API runs on H2 in-memory database only at the moment. Extending it to use Postgres should be a simple configuration change. </p>
+</body>
+</html>
