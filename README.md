@@ -25,10 +25,10 @@ Provides a REST Api to store and read measurements of patients.
         "value": 5.5
     }
 
-The `patientId` is the reference to the person which metadata is stored in other parts of the system.
+The `patientId` is the reference to the person whose metadata is stored in other parts of the system.
 The `type` value can be chosen freely.
 There is one `timestamp` format allowed currently.
-The `value` property is the a decimal value.
+The `value` property is a decimal value.
 
 This is an example curl call:
 
@@ -47,7 +47,7 @@ Following filters can be applied:
  * from - time range start, if omitted no lower boundary
  * to - time range start, if omitted no upper boundary
 
-For demo reasons the time range filter only support the format `yyyyMMdd` currently. They are inclusive and assume UTC.
+For demo reasons the time range filter only supports the format `yyyyMMdd` currently. They are inclusive and assume UTC.
 
 The response will contain a sequence of measurements:
 
@@ -87,17 +87,17 @@ This is the curl example which retrieves all entries for the patient:
 
     ./sbt run
     
-This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000] ( http://localhost:9000 ). 
+This will download sbt and project dependencies on the first run. Afterwards the web application will be reachable at [http://localhost:9000](http://localhost:9000). 
 
 
 ## Test 
 
-./sbt test
+    ./sbt test
 
 
 ## Continuous Deployment
 
-On every push on branch `master` the application will be built and tested on [travis] (https://travis-ci.org/JanRudert/body-measurement-api/builds). If the build succeeds, it will be deployed to heroku and will be public available at [http://body-measurement-api.herokuapp.com/].
+On every push on branch `master` the application will be built and tested on [travis](https://travis-ci.org/JanRudert/body-measurement-api/builds). If the build succeeds, it will be deployed to heroku and will be public available at [heroku](http://body-measurement-api.herokuapp.com/).
     
 # Persistence
 
