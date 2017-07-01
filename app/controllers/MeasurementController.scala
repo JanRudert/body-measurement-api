@@ -60,7 +60,7 @@ object MeasurementController {
   private def parseInstant(dayBoundary: LocalDate => LocalDateTime): String => Instant =
     stringToDate.andThen(dayBoundary).andThen(_.toInstant(ZoneOffset.UTC))
 
-  private val stringToDate = LocalDate.parse(_: String, DateTimeFormatter.ofPattern("yyyyMMdd"))
+  private val stringToDate: String => LocalDate = LocalDate.parse(_: String, DateTimeFormatter.ofPattern("yyyyMMdd"))
 
   private val startOfDay: LocalDate => LocalDateTime = _.atStartOfDay()
 
