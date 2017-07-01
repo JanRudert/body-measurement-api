@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter
 import java.time.{Instant, LocalDate, LocalDateTime, ZoneOffset}
 import javax.inject.Inject
 
+import controllers.MeasurementController._
 import model.BodyMeasurement
 import play.api.libs.json.Json._
 import play.api.libs.json._
@@ -16,7 +17,6 @@ import scala.util.{Failure, Success, Try}
 class MeasurementController @Inject()(cc: ControllerComponents,
                                       repository: MeasurementRepository)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
-  private val dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd")
 
   def create = Action.async(parse.json) { request: Request[JsValue] =>
 
@@ -47,16 +47,24 @@ class MeasurementController @Inject()(cc: ControllerComponents,
     }
 
   }
+  
+
+}
+
+
+object MeasurementController {
 
   private def parameter(key: String)(implicit request: RequestHeader) =
     request.getQueryString(key).map(_.trim).filter(_.nonEmpty)
 
   private def parseInstant(dayBoundary: LocalDate => LocalDateTime): String => Instant =
-    (LocalDate.parse(_: String, dateFormat)).andThen(dayBoundary).andThen(_.toInstant(ZoneOffset.UTC))
+    stringToDate.andThen(dayBoundary).andThen(_.toInstant(ZoneOffset.UTC))
+
+  private val stringToDate = LocalDate.parse(_: String, DateTimeFormatter.ofPattern("yyyyMMdd"))
 
   private val startOfDay: LocalDate => LocalDateTime = _.atStartOfDay()
 
   private val startOfNextDay: LocalDate => LocalDateTime = _.plusDays(1).atStartOfDay()
-
+  
 }
 
